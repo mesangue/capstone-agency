@@ -29,9 +29,9 @@ def create_app(test_config=None):
 	'''
 
 	@app.route('/') 
-	def delete_me():
+	def greeting():
 		return jsonify({
-			'message':'Hello World!'
+			'message':'Hello World - The API is up!'
 			,'success': True
 			})
 
