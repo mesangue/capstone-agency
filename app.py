@@ -14,57 +14,57 @@ def create_app(test_config=None):
     def greeting(): 
         return jsonify({
             'message': 'Hello World - The API is up!'
-            , 'success':  True
+            , 'success': True
         })
 
     @app.route('/movies', methods=['GET']) 
-    @requires_auth('get: movies')
+    @requires_auth('get:movies')
     def get_movies(jwt):
         movies = Movie.query.all()
         if len(movies) == 0: 
             abort(404)
         movie_list = [item.format() for item in movies]
         return jsonify({
-            'success':  True
-            , 'movies':  movie_list
+            'success': True
+            , 'movies': movie_list
         })
 
-    @app.route('/movies/<int: movie_id>', methods=['GET']) 
-    @requires_auth('get: movies')
+    @app.route('/movies/<int:movie_id>', methods=['GET']) 
+    @requires_auth('get:movies')
     def get_single_movie(jwt,movie_id):
         movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
         if movie is None: 
             abort(404)
         return jsonify({
-            'success':  True
-            , 'movies':  [movie.format()]
+            'success': True
+            , 'movies': [movie.format()]
         })
 
     @app.route('/actors', methods=['GET']) 
-    @requires_auth('get: actors')
+    @requires_auth('get:actors')
     def get_actors(jwt):
         actors = Actor.query.all()
         if len(actors) == 0: 
             abort(404)
         actor_list = [item.format() for item in actors]
         return jsonify({
-            'success':  True
-            , 'actors':  actor_list
+            'success': True
+            , 'actors': actor_list
         })
 
-    @app.route('/actors/<int: actor_id>', methods=['GET']) 
-    @requires_auth('get: actors')
+    @app.route('/actors/<int:actor_id>', methods=['GET']) 
+    @requires_auth('get:actors')
     def get_single_actor(jwt,actor_id):
         actor = Movie.query.filter(Actor.id == actor_id).one_or_none()
         if actor is None: 
             abort(404)
         return jsonify({
-            'success':  True
-            , 'actors':  [actor.format()]
+            'success': True
+            , 'actors': [actor.format()]
         })
 
-    @app.route('/movies/<int: movie_id>', methods=['DELETE'])
-    @requires_auth('delete: movies')
+    @app.route('/movies/<int:movie_id>', methods=['DELETE'])
+    @requires_auth('delete:movies')
     def delete_movie(jwt,movie_id):
         movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
         if movie is None: 
@@ -80,8 +80,8 @@ def create_app(test_config=None):
         except: 
             abort(422)
 
-    @app.route('/actors/<int: actor_id>', methods=['DELETE'])
-    @requires_auth('delete: actors')
+    @app.route('/actors/<int:actor_id>', methods=['DELETE'])
+    @requires_auth('delete:actors')
     def delete_actor(jwt,actor_id):
         actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
         if actor is None: 
@@ -98,7 +98,7 @@ def create_app(test_config=None):
             abort(422)
 
     @app.route('/movies', methods=['POST']) 
-    @requires_auth('post: movies')
+    @requires_auth('post:movies')
     def add_movie(jwt):
         data = request.get_json()
         if data is None or len(str(data['title']).strip())==0: 
@@ -111,13 +111,13 @@ def create_app(test_config=None):
             new_movie.insert()
             return jsonify({
                 'success': True
-                , 'data':  new_movie.format()
+                , 'data': new_movie.format()
             })
         except: 
             abort(422)
 
     @app.route('/actors', methods=['POST']) 
-    @requires_auth('post: actors')
+    @requires_auth('post:actors')
     def add_actor(jwt):
         data = request.get_json()
         if len(str(data['name']).strip())==0 or data is None: # will allow gender to be anything - TBD by project owner
@@ -136,13 +136,13 @@ def create_app(test_config=None):
             new_actor.insert()
             return jsonify({
                 'success': True
-                , 'data':  new_actor.format()
+                , 'data': new_actor.format()
             })
         except: 
             abort(422)
 
-    @app.route('/actors/<int: actor_id>', methods=['PATCH']) 
-    @requires_auth('patch: actors')
+    @app.route('/actors/<int:actor_id>', methods=['PATCH']) 
+    @requires_auth('patch:actors')
     def patch_actors(jwt,actor_id):
         data = request.get_json()
         actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
@@ -172,8 +172,8 @@ def create_app(test_config=None):
         except: 
             abort(422)
 
-    @app.route('/movies/<int: movie_id>', methods=['PATCH']) 
-    @requires_auth('patch: movies')
+    @app.route('/movies/<int:movie_id>', methods=['PATCH']) 
+    @requires_auth('patch:movies')
     def patch_movies(jwt,movie_id):
         data = request.get_json()
         movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
@@ -200,17 +200,17 @@ def create_app(test_config=None):
     @app.errorhandler(422)
     def unprocessable(error):
         return jsonify({
-            "success":  False, 
-            "error":  422,
-            "message":  "unprocessable"
+            "success": False, 
+            "error": 422,
+            "message": "unprocessable"
         }), 422
 
     @app.errorhandler(404)
     def notfound(error):
         return jsonify({
-            "success":  False, 
-            "error":  404,
-            "message":  "not found"
+            "success": False, 
+            "error": 404,
+            "message": "not found"
         }), 404
 
     @app.errorhandler(400)
@@ -218,7 +218,7 @@ def create_app(test_config=None):
         return jsonify({
             'success': False
             , 'error': 400
-            , 'message':  'bad request'
+            , 'message': 'bad request'
         }), 400
 
     @app.errorhandler(500)
@@ -226,15 +226,15 @@ def create_app(test_config=None):
         return jsonify({
             'success': False
             , 'error': 500
-            , 'message':  'internal server error'
+            , 'message': 'internal server error'
         }), 500
 
     @app.errorhandler(AuthError)
     def autherror(AuthError):
         return jsonify({
-            "success":  False, 
-            "error":  AuthError.status_code,
-            "message":  AuthError.error['description']
+            "success": False, 
+            "error": AuthError.status_code,
+            "message": AuthError.error['description']
         }), AuthError.status_code
 
     return app
