@@ -25,7 +25,7 @@ def create_app(test_config=None):
             abort(404)
         movie_list = [item.format() for item in movies]
         return jsonify({
-            'success' :  True
+            'success':  True
             , 'movies':  movie_list
         })
 
@@ -36,7 +36,7 @@ def create_app(test_config=None):
         if movie is None: 
             abort(404)
         return jsonify({
-            'success' :  True
+            'success':  True
             , 'movies':  [movie.format()]
         })
 
@@ -48,7 +48,7 @@ def create_app(test_config=None):
             abort(404)
         actor_list = [item.format() for item in actors]
         return jsonify({
-            'success' :  True
+            'success':  True
             , 'actors':  actor_list
         })
 
@@ -59,7 +59,7 @@ def create_app(test_config=None):
         if actor is None: 
             abort(404)
         return jsonify({
-            'success' :  True
+            'success':  True
             , 'actors':  [actor.format()]
         })
 

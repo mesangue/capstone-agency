@@ -1,7 +1,7 @@
 import os
+import json
 from sqlalchemy import Column, String, Integer, Date, CheckConstraint
 from flask_sqlalchemy import SQLAlchemy
-import json
 from flask_migrate import Migrate
 
 db = SQLAlchemy()

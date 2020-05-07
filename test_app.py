@@ -18,7 +18,7 @@ class CapstoneTestCase(unittest.TestCase):
 		# all else
 		setup_db(self.app)
 		self.sample_movie = {
-			'title' : 'Diehard'
+			'title': 'Diehard'
 			, 'release_date': '07/15/1988'
 		}
 
