@@ -28,70 +28,70 @@ No login page has been built yet. Refer to: https://fsnd-auth-mesangue.auth0.com
 
 ## API functions
 
-	URL 'https://capstone-agency.herokuapp.com/' ; Allowed method: GET ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/' ; Allowed method: GET ; Required Permissions: No
 		returns {
 			'message':'Hello World - The API is up!'
 			,'success': True
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/movies' ; Allowed method: GET ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/movies' ; Allowed method: GET ; Required Permissions: Yes
 		returns JSON {
 			'success' : True
 			,'movies': List of movies on Database 
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/movies/<int:movie_id>' ; Allowed method: GET ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/movies/<int:movie_id>' ; Allowed method: GET ; Required Permissions: Yes
 		returns JSON {
 			'success' : True
 			,'movies': Specific movie from Database
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/actors' ; Allowed method: GET ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/actors' ; Allowed method: GET ; Required Permissions: Yes
 		returns JSON {
 			'success' : True
 			,'actors': List of actors on Database
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/actors/<int:actor_id>' ; Allowed method: GET ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/actors/<int:actor_id>' ; Allowed method: GET ; Required Permissions: Yes
 		returns JSON {
 			'success' : True
 			,'actors': Specific actor from Database
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/movies/<int:movie_id>'' ; Allowed method: DELETE ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/movies/<int:movie_id>'' ; Allowed method: DELETE ; Required Permissions: Yes
 		returns JSON {
 			'success':True
 			,'previous_data': Data from deleted movie
 			,'deleted_id':Id of deleted movie
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/actors/<int:actor_id>' ; Allowed method: DELETE ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/actors/<int:actor_id>' ; Allowed method: DELETE ; Required Permissions: Yes
 		returns JSON {
 			'success':True
 			,'previous_data': Data from deleted actor
 			,'deleted_id': Id of deleted actor
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/movies' ; Allowed method: POST ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/movies' ; Allowed method: POST ; Required Permissions: Yes
 		returns JSON {
 			'success':True
 			,'data': Data fom new movie added to database
 		}
 
-	URL 'https://capstone-agency.herokuapp.com/actors' ; Allowed method: POST ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/actors' ; Allowed method: POST ; Required Permissions: Yes
 		returns JSON {
 			'success':True
 			,'data': Data fom new actor added to database
 		}
 
-	URL 'https://capstone-agency.herokuapp.com/actors/<int:actor_id>' ; Allowed method: PATCH ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/actors/<int:actor_id>' ; Allowed method: PATCH ; Required Permissions: Yes
 		returns JSON {
 			'success':True
 			,'previous_data': Data before changes
 			,'data':Updated actor data
 			}
 
-	URL 'https://capstone-agency.herokuapp.com/movies/<int:movie_id>' ; Allowed method: PATCH ; Required Permissions: None
+	URL 'https://capstone-agency.herokuapp.com/movies/<int:movie_id>' ; Allowed method: PATCH ; Required Permissions: Yes
 		returns JSON {
 			'success':True
 			,'previous_data': Data before changes
@@ -104,11 +104,11 @@ No login page has been built yet. Refer to: https://fsnd-auth-mesangue.auth0.com
 
 ## Error messages
 	All errors follow the following structure. Refer to message for troubleshooting.
-						{
-						"success": False, 
-						"error": Status code,
-						"message": Description of error (e.g. "Token expired.")
-						}
+		returns JSON {
+			"success": False, 
+			"error": Status code,
+			"message": Description of error (e.g. "Token expired.")
+			}
 
 
 

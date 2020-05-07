@@ -19,13 +19,13 @@ class CapstoneTestCase(unittest.TestCase):
 		setup_db(self.app)
 		self.sample_movie = {
 			'title' : 'Diehard'
-			,'release_date' : '07/15/1988'
+			, 'release_date': '07/15/1988'
 		}
 
 		self.sample_actor = {
-			'name':'Bruce Willis'
-			,'age':'32'
-			,'gender':'male'
+			'name': 'Bruce Willis'
+			, 'age': '32'
+			, 'gender': 'male'
 		}
 		
 		with self.app.app_context():
@@ -35,12 +35,6 @@ class CapstoneTestCase(unittest.TestCase):
 	
 	def tearDown(self):
 		pass
-
-	'''
-	####################################################
-	####### Test Actors
-	####################################################
-	'''
 
 	def test_app_setup(self):
 		res = self.client().get('/')
@@ -55,8 +49,7 @@ class CapstoneTestCase(unittest.TestCase):
 		self.assertEqual(res.status_code,200)
 		self.assertEqual(data['success'],True)
 		self.assertEqual(data['data']['name'], 'Bruce Willis')
-	'''
-	'''
+
 	def test_failed_post_actor(self):
 		res = self.client().post('/actors', headers=self.header_producer) # no json for creation
 		data = json.loads(res.data)
@@ -72,7 +65,7 @@ class CapstoneTestCase(unittest.TestCase):
 
 	def test_patch_actor(self):
 		sample = Actor.query.first()
-		res = self.client().patch('/actors/'+str(sample.id),json={'name':'Walter Bruce Willis'}, headers=self.header_director)
+		res = self.client().patch('/actors/'+str(sample.id),json={'name': 'Walter Bruce Willis'}, headers=self.header_director)
 		data = json.loads(res.data)
 		old_data = self.sample_actor
 		self.assertEqual(res.status_code,200)
@@ -103,12 +96,6 @@ class CapstoneTestCase(unittest.TestCase):
 		self.assertEqual(data['success'],False)
 		self.assertEqual(data['message'], 'not found')
 
-	'''
-	####################################################
-	####### Test Movies
-	####################################################
-	'''
-
 	def test_post_movie(self):
 		res = self.client().post('/movies',json=self.sample_movie, headers=self.header_producer)
 		data = json.loads(res.data)
@@ -131,7 +118,7 @@ class CapstoneTestCase(unittest.TestCase):
 
 	def test_patch_movie(self):
 		sample = Movie.query.first()
-		res = self.client().patch('/movies/'+str(sample.id),json={'name':'Diehard.'}, headers=self.header_producer)
+		res = self.client().patch('/movies/'+str(sample.id),json={'name': 'Diehard.'}, headers=self.header_producer)
 		old_data = self.sample_movie
 		data = json.loads(res.data)
 		self.assertEqual(res.status_code,200)
@@ -162,12 +149,6 @@ class CapstoneTestCase(unittest.TestCase):
 		self.assertEqual(data['success'],False)
 		self.assertEqual(data['message'], 'not found')
 
-	'''
-	####################################################
-	####### Auth tests
-	####################################################
-	'''
-
 	def test_no_jwt(self):
 		sample = Actor.query.first() #delete first result for test
 		res = self.client().delete('/actors/'+str(sample.id))
@@ -182,5 +163,5 @@ class CapstoneTestCase(unittest.TestCase):
 		self.assertEqual(res.status_code,401)
 		self.assertEqual(data['message'],"User does not have permission")
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     unittest.main()
