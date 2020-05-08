@@ -151,6 +151,8 @@ def create_app(test_config=None):
             actor.age = data['age']
         if 'gender' in data:
             actor.gender = data['gender']
+        if 'movies' in data:
+            actor.movies = data['movies']
         try:
             actor.update()
             return jsonify({'success': True,
@@ -174,6 +176,8 @@ def create_app(test_config=None):
                 movie.title = data['title']
         if 'release_date' in data:
             movie.release_date = data['release_date']
+        if 'actors' in data:
+            movie.actors = data['actors']
         try:
             movie.update()
             return jsonify({'success': True,
